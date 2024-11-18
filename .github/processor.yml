@@ -24,6 +24,9 @@ jobs:
     - name: Install Mintlify Scrape
       run: npm install @mintlify/scraping@latest -g
 
+    - name: Add servers if required
+      run: bash ./scripts/add_servers.sh
+
     - name: Verify OpenAPI Files Directory
       run: |
         if [ ! -d "./openapi" ]; then
@@ -76,35 +79,35 @@ jobs:
         # Set the output array as an output variable
         echo "mint_output=$output_array" >> "$GITHUB_OUTPUT"
 
-  update_mint_json:
-    runs-on: ubuntu-latest
-    needs: process_openapi_files
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Replace placeholder in mint.json.tpl
-        env:
-          MINT_OUTPUT: ${{ needs.process_openapi_files.outputs.mint_output }}
-        run: |          
-          # Create the mint.json from mint.json.tpl
-          sed "s|{{REPLACE_HERE}}|$MINT_OUTPUT|" mint.json.tpl > mint.json.new
-          
-          # Delete the old mint.json if it exists
-          if [ -f "mint.json" ]; then
-            rm -f mint.json
-          fi
-          
-          cat mint.json.new
-          
-          # Move the new mint.json to the correct location
-          mv mint.json.new mint.json
-
-      - name: Commit changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add mint.json
-          git commit -m "Update mint.json with new OpenAPI data"
-          git push origin main
+#  update_mint_json:
+#    runs-on: ubuntu-latest
+#    needs: process_openapi_files
+#
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
+#
+#      - name: Replace placeholder in mint.json.tpl
+#        env:
+#          MINT_OUTPUT: ${{ needs.process_openapi_files.outputs.mint_output }}
+#        run: |
+#          # Create the mint.json from mint.json.tpl
+#          sed "s|{{REPLACE_HERE}}|$MINT_OUTPUT|" mint.json.tpl > mint.json.new
+#
+#          # Delete the old mint.json if it exists
+#          if [ -f "mint.json" ]; then
+#            rm -f mint.json
+#          fi
+#
+#          cat mint.json.new
+#
+#          # Move the new mint.json to the correct location
+#          mv mint.json.new mint.json
+#
+#      - name: Commit changes
+#        run: |
+#          git config --global user.name "github-actions[bot]"
+#          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+#          git add mint.json
+#          git commit -m "Update mint.json with new OpenAPI data"
+#          git push origin main
