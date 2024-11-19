@@ -87,23 +87,22 @@
         "api-reference/authentication",
         "api-reference/errors",
         {
-          "group": "Calendar",
+          "group": "Calendars",
           "pages": [
-            "api-reference/calendar/introduction",
-            "api-reference/calendar/conference_calls/get-conference-calls",
-            "api-reference/calendar/dividends/get-dividends",
-            "api-reference/calendar/earnings/get-earnings",
-            "api-reference/calendar/economics/get-economics",
-            "api-reference/calendar/events/get-events",
-            "api-reference/calendar/fda/get-fda",
-            "api-reference/calendar/guidance/get-guidance",
-            "api-reference/calendar/ipos/get-ipos",
-            "api-reference/calendar/ma/get-merger-and-acquisition",
-            "api-reference/calendar/offerings/get-offerings",
-            "api-reference/calendar/ratings/get-ratings",
-            "api-reference/calendar/ratings_analysts/get-ratings-analysts",
-            "api-reference/calendar/ratings_firms/get-ratings-firms",
-            "api-reference/calendar/splits/get-splits"
+            "api-reference/calendar_api/conference_calls/get-conference-calls",
+            "api-reference/calendar_api/dividends/get-dividends",
+            "api-reference/calendar_api/earnings/get-earnings",
+            "api-reference/calendar_api/economics/get-economics",
+            "api-reference/calendar_api/events/get-events",
+            "api-reference/calendar_api/fda/get-fda",
+            "api-reference/calendar_api/guidance/get-guidance",
+            "api-reference/calendar_api/ipos/get-ipos",
+            "api-reference/calendar_api/ma/get-merger-and-acquisition",
+            "api-reference/calendar_api/offerings/get-offerings",
+            "api-reference/calendar_api/ratings/get-ratings",
+            "api-reference/calendar_api/ratings_analysts/get-ratings-analysts",
+            "api-reference/calendar_api/ratings_firms/get-ratings-firms",
+            "api-reference/calendar_api/splits/get-splits"
           ]
         }
       ]

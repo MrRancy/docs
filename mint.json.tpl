@@ -7,8 +7,8 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
+    "primary": "#8924A6",
+    "light": "#8924A6",
     "dark": "#0D9373",
     "anchors": {
       "from": "#0D9373",
@@ -30,12 +30,12 @@
   },
   "topbarLinks": [
     {
-      "name": "Learn More",
-      "url": "https://www.benzinga.com/apis"
+      "name": "Support",
+      "url": "mailto:licensing@benzinga.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
+    "name": "Console",
     "url": "https://www.benzinga.com/apis/licensing/register"
   },
   "api": {
@@ -46,36 +46,61 @@
       "mode": "show"
     }
   },
-  "anchors": [
+  "tabs": [
     {
-      "name": "API Suite",
-      "icon": "list",
-      "url": "https://www.benzinga.com/apis/data"
+      "name": "Components",
+      "url": "components"
     },
     {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://www.benzinga.com/apis/blog/"
+      "name": "API Reference",
+      "url": "api-reference"
     },
     {
-      "name": "Contact Us",
-      "icon": "envelope",
-      "url": "mailto:licensing@benzinga.com"
+      "name": "WS Reference",
+      "url": "ws-reference"
+    },
+    {
+      "name": "Open Source",
+      "url": "open-source"
     }
   ],
   "navigation": [
     {
       "group": "Introduction",
       "pages": [
-        "home",
-        "introduction"
+        "introduction/welcome",
+        "introduction/introduction",
+        "introduction/architecture",
+        "introduction/faq"
       ]
     },
     {
-      "group": "Benzinga APIs",
+      "group": "Services",
       "pages": [
-        "benzinga-apis/introduction",
+        "services/overview"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/authentication",
+        "api-reference/errors",
         {{REPLACE_HERE}}
+      ]
+    },
+    {
+      "group": "WS Documentation",
+      "pages": [
+        "ws-reference/introduction",
+        "ws-reference/authentication",
+        "ws-reference/errors",
+        {
+          "group": "Data Websocket",
+          "pages": [
+            "ws-reference/data-websocket/get-analyst-insights-stream"
+          ]
+        }
       ]
     }
   ],
