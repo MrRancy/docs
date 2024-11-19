@@ -44,8 +44,11 @@ jobs:
 
       - name: Replace placeholder in mint.json.tpl
         run: |
+          # Decode the mint_output variable before using it in the template
+          decoded_mint_output=$(echo "$mint_output" | jq -Rr @uri)
+          
           # Create the mint.json from mint.json.tpl
-          sed "s|{{REPLACE_HERE}}|$mint_output|" mint.json.tpl > mint.json.new
+          sed "s|{{REPLACE_HERE}}|$decoded_mint_output|" mint.json.tpl > mint.json.new
 
           # Delete the old mint.json if it exists
           if [ -f "mint.json" ]; then

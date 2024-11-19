@@ -59,11 +59,14 @@ for file in ./openapi/*.yml; do
   cd ../../
 done
 
-# Create a JSON array from the output array
+# Serialize the JSON array to a string
 json_array=$(printf '%s\n' "${output_array[@]}" | jq -s '.')
+
+# Serialize the JSON string to make it safe for GitHub Actions (escape special characters)
+json_array_escaped=$(echo "$json_array" | jq -sRr @uri)
 
 # Print the final JSON array
 echo "$json_array"
 
-# Output the JSON array to GitHub Actions' output file
-echo "mint_output=$json_array" >> $GITHUB_ENV
+# Output the serialized and escaped JSON to GitHub Actions' environment
+echo "mint_output=$json_array_escaped" >> $GITHUB_ENV
