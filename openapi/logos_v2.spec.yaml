@@ -5,7 +5,7 @@ info:
     sizing requirements.
   version: 2.0.0
 servers:
-  - url: https://api.benzinga.com/api/v2/logos
+  - url: https://api.benzinga.com/api/v2/logosv2
 paths:
   /api/v2/logos/bulk-sync:
     get:
