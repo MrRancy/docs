@@ -63,7 +63,27 @@ done
 json_array=$(printf '%s\n' "${output_array[@]}" | jq -s '.')
 
 # Print the final JSON array
-echo "$json_array"
+#echo "$json_array"
 
-# Output the serialized and escaped JSON to GitHub Actions' environment
-echo "mint_output=$output_array" >> $GITHUB_ENV
+# Serialize the JSON array to a string
+json_array=$(echo "$json_array" | jq -c -r '.[] | @json' | paste -sd, -)
+
+# Create the new mint.json file
+echo "$json_array" > temp.json
+sed "/{{REPLACE_HERE}}/r temp.json" mint.json.tpl > mint.json.new
+sed -i '' -e 's/{{REPLACE_HERE}}//g' mint.json.new
+
+#Delete the old mint.json if it exists
+if [ -f "mint.json" ]; then
+  rm -f mint.json
+fi
+
+cat mint.json.new
+
+# Move the new mint.json to the correct location
+jq . mint.json.new > mint.json
+
+# Clean up
+rm mint.json.new
+rm temp.json
+
