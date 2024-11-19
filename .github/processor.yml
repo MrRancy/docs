@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - dev
-    paths:
-      - 'openapi/**'  # Trigger action only when files in the ./openapi folder or its subdirectories change
   workflow_dispatch: # Allows the action to be triggered manually
 
 jobs:
