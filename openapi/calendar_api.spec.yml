@@ -1,15 +1,18 @@
 openapi: 3.0.0
 info:
   contact: {}
-  description: This REST API returns structured data for conference calls, dividends, earnings (and future earnings dates), economics, pharmaceutical announcements, guidance, IPOs, secondary offerings, ratings, M&A activity, and splits.
-  termsOfService: https://swagger.io/terms/
+  description: This REST API returns structured data for conference calls,
+    dividends, earnings (and future earnings dates), economics, pharmaceutical
+    announcements, guidance, IPOs, secondary offerings, ratings, M&A activity,
+    and splits.
+  termsOfService: http://swagger.io/terms/
   title: Calendar API
   version: 2.1.0
 paths:
-  /calendar/conference-calls:
+  /calendar-removed/:
     get:
-      description: Returns Conference Calls data
-      operationId: get-conference-calls
+      description: Get Removed from v2 endpoint
+      operationId: get-removed
       parameters:
         - description: Page number
           in: query
@@ -21,7 +24,63 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Page size (alternative)
+        - description: Type
+          in: query
+          name: type
+          schema:
+            type: string
+            enum:
+              - '"ratings"'
+              - '"earnings"'
+              - '"dividends"'
+              - '"splits"'
+              - '"ipos"'
+              - '"offerings"'
+              - '"economics"'
+              - '"guidance"'
+              - '"ma"'
+              - '"conference calls"'
+        - description: Updated time in Unix format
+          in: query
+          name: updated
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/models.RmvdJSON"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/models.RmvdJSON"
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      security:
+        - ApiKeyAuth: []
+      summary: Get Removed (v2)
+      tags:
+        - removed
+  /calendar/conference-calls:
+    get:
+      description: Returns Conference Calls data
+      operationId: get-conference-calls
+      parameters:
+        - description: Page number
+          in: query
+          name: page
+          schema:
+            type: integer
+        - description: Page size
           in: query
           name: pagesize
           schema:
@@ -44,59 +103,9 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
-        - description: Importance
-          in: query
-          name: parameters[importance]
-          schema:
-            type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -105,113 +114,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Conference Calls
@@ -248,7 +150,7 @@ paths:
   /calendar/dividends:
     get:
       description: Returns a list of dividends
-      operationId: get-dividends
+      operationId: get-dividends-v22
       parameters:
         - description: Page number
           in: query
@@ -256,11 +158,6 @@ paths:
           schema:
             type: integer
         - description: Page size
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
           in: query
           name: pagesize
           schema:
@@ -288,21 +185,11 @@ paths:
           name: parameters[date_sort]
           schema:
             type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
+            enum:
+              - '"announced"'
+              - '"ex"'
+              - '"payable"'
+              - '"record"'
         - description: Dividend yield operation
           in: query
           name: parameters[dividend_yield_operation]
@@ -318,24 +205,16 @@ paths:
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -344,113 +223,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Dividends
@@ -496,11 +268,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -522,59 +289,21 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
+        - description: Sort by date
           in: query
           name: parameters[date_sort]
           schema:
             type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
+            enum:
+              - date
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -583,113 +312,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Earnings
@@ -735,11 +357,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -761,59 +378,21 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+        - description: Country
           in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
-        - description: Tickers
-          in: query
-          name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
+          name: country
           schema:
             type: string
         - description: Updated time in Unix format
@@ -822,108 +401,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
         - description: Event category
           in: query
           name: event_category
@@ -974,11 +451,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -1000,59 +472,21 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -1061,113 +495,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Events
@@ -1213,11 +540,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -1239,59 +561,22 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
+        - description: Date search field
           in: query
-          name: parameters[date_sort]
+          name: parameters[date_search_field]
           schema:
             type: string
-        - description: Sort order
+            enum:
+              - announced
+              - target
+        - description: Date search strict
           in: query
-          name: parameters[sort]
+          name: parameters[date_search_strict]
           schema:
-            type: string
-        - description: Action
+            type: boolean
+        - description: Securities
           in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
-        - description: Importance
-          in: query
-          name: parameters[importance]
-          schema:
-            type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
-        - description: Tickers
-          in: query
-          name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
+          name: parameters[securities]
           schema:
             type: string
         - description: Updated time in Unix format
@@ -1300,113 +585,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: FDA
@@ -1452,11 +630,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -1478,59 +651,30 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
-            type: integer
-        - description: Is primary
+            type: string
+            enum:
+              - "0"
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - "5"
+        - description: Is Primary
           in: query
           name: parameters[is_primary]
           schema:
             type: string
+            enum:
+              - '"Y"'
+              - '"N"'
+              - '"All"'
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -1539,113 +683,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Guidance
@@ -1682,7 +719,7 @@ paths:
   /calendar/ipos:
     get:
       description: Returns the IPOs data
-      operationId: get-ipos
+      operationId: get-ipos-v21
       parameters:
         - description: Page number
           in: query
@@ -1690,11 +727,6 @@ paths:
           schema:
             type: integer
         - description: Page size
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
           in: query
           name: pagesize
           schema:
@@ -1717,46 +749,6 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
-        - description: Importance
-          in: query
-          name: parameters[importance]
-          schema:
-            type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
         - description: Tickers
           in: query
           name: parameters[tickers]
@@ -1767,124 +759,12 @@ paths:
           name: parameters[ipo_type]
           schema:
             type: string
-        - description: Type
-          in: query
-          name: type
-          schema:
-            type: string
         - description: Updated time in Unix format
           in: query
           name: parameters[updated]
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: IPOs
@@ -1930,11 +810,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -1956,59 +831,21 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -2017,113 +854,15 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
+        - description: Sort by date
           in: query
-          name: updated
+          name: parameters[date_sort]
           schema:
             type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
+            enum:
+              - expected
+              - completed
+              - announced
       responses:
         "200":
           description: MA
@@ -2169,11 +908,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -2195,59 +929,21 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -2256,113 +952,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Offerings
@@ -2399,19 +988,19 @@ paths:
   /calendar/ratings:
     get:
       description: Returns analyst ratings data
-      operationId: get-rating
+      operationId: get-ratings
       parameters:
+        - description: Fields
+          in: query
+          name: fields
+          schema:
+            type: string
         - description: Page number
           in: query
           name: page
           schema:
             type: integer
         - description: Page size
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
           in: query
           name: pagesize
           schema:
@@ -2434,59 +1023,21 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -2495,47 +1046,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
         - description: Analyst IDs
           in: query
           name: parameters[analyst_id]
@@ -2546,60 +1056,31 @@ paths:
           name: parameters[firm_id]
           schema:
             type: string
-        - description: Search keys
+        - description: Action
           in: query
-          name: search_keys
+          name: parameters[action]
           schema:
             type: string
-        - description: Search keys type
+            enum:
+              - '"Downgrades"'
+              - '"Upgrades"'
+              - '"Maintains"'
+              - '"Reinstates"'
+              - '"Reiterates"'
+              - '"Assumes"'
+              - '"Initiates Coverage On"'
+              - '"Terminates Coverage On"'
+              - '"Removes"'
+              - '"Suspends"'
+              - '"Firm Dissolved"'
+        - description: Firm
           in: query
-          name: search_keys_type
+          name: firm
           schema:
             type: string
-        - description: Updated since time in Unix format
+        - description: Analyst
           in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
+          name: analyst
           schema:
             type: string
       responses:
@@ -2650,116 +1131,6 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Page size (alternative)
-          in: query
-          name: pagesize
-          schema:
-            type: integer
-        - description: Date in YYYY-MM-DD format
-          in: query
-          name: parameters[date]
-          schema:
-            type: string
-            format: date
-        - description: Start date in YYYY-MM-DD format
-          in: query
-          name: parameters[date_from]
-          schema:
-            type: string
-            format: date
-        - description: End date in YYYY-MM-DD format
-          in: query
-          name: parameters[date_to]
-          schema:
-            type: string
-            format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
-        - description: Importance
-          in: query
-          name: parameters[importance]
-          schema:
-            type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
-        - description: Tickers
-          in: query
-          name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
-          schema:
-            type: string
-        - description: Updated time in Unix format
-          in: query
-          name: parameters[updated]
-          schema:
-            type: string
-            format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
         - description: Fields
           in: query
           name: fields
@@ -2770,77 +1141,27 @@ paths:
           name: analyst
           schema:
             type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
         - description: Analyst name
           in: query
           name: analyst_name
           schema:
             type: string
-        - description: Symbols
+        - description: Firm
           in: query
-          name: symbols
+          name: firm
           schema:
             type: string
-        - description: Latest
+        - description: Firm name
           in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
+          name: firm_name
           schema:
             type: string
-        - description: Events
+        - description: Updated time in Unix format
           in: query
-          name: events
+          name: updated
           schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
+            type: integer
+            format: int64
       responses:
         "200":
           description: Ratings Analysts
@@ -2889,124 +1210,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Page size (alternative)
-          in: query
-          name: pagesize
-          schema:
-            type: integer
-        - description: Date in YYYY-MM-DD format
-          in: query
-          name: parameters[date]
-          schema:
-            type: string
-            format: date
-        - description: Start date in YYYY-MM-DD format
-          in: query
-          name: parameters[date_from]
-          schema:
-            type: string
-            format: date
-        - description: End date in YYYY-MM-DD format
-          in: query
-          name: parameters[date_to]
-          schema:
-            type: string
-            format: date
-        - description: Date sort order
-          in: query
-          name: parameters[date_sort]
-          schema:
-            type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
-        - description: Importance
-          in: query
-          name: parameters[importance]
-          schema:
-            type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
-        - description: Tickers
-          in: query
-          name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
-          schema:
-            type: string
-        - description: Updated time in Unix format
-          in: query
-          name: parameters[updated]
-          schema:
-            type: string
-            format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
         - description: Fields
           in: query
           name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
           schema:
             type: string
         - description: Firm
@@ -3014,82 +1220,22 @@ paths:
           name: firm
           schema:
             type: string
-        - description: Analyst IDs
+        - description: Updated time in Unix format
           in: query
-          name: parameters[analyst_id]
+          name: updated
           schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
+            type: integer
             format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
-          description: Ratings Analysts
+          description: Ratings Firms
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/models.RatingsAnalystJSON"
+                $ref: "#/components/schemas/models.RatingsFirmJSON"
             text/xml:
               schema:
-                $ref: "#/components/schemas/models.RatingsAnalystJSON"
+                $ref: "#/components/schemas/models.RatingsFirmJSON"
         "400":
           description: Bad Request
           content:
@@ -3125,11 +1271,6 @@ paths:
             type: integer
         - description: Page size
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Page size (alternative)
-          in: query
           name: pagesize
           schema:
             type: integer
@@ -3151,59 +1292,29 @@ paths:
           schema:
             type: string
             format: date
-        - description: Date sort order
+        - description: Date search field
           in: query
-          name: parameters[date_sort]
+          name: parameters[date_search_field]
           schema:
             type: string
-        - description: Sort order
-          in: query
-          name: parameters[sort]
-          schema:
-            type: string
-        - description: Action
-          in: query
-          name: parameters[action]
-          schema:
-            type: string
-        - description: Country
-          in: query
-          name: country
-          schema:
-            type: string
-        - description: Dividend yield operation
-          in: query
-          name: parameters[dividend_yield_operation]
-          schema:
-            type: string
-        - description: Dividend yield
-          in: query
-          name: parameters[dividend_yield]
-          schema:
-            type: number
+            enum:
+              - announced
+              - target
         - description: Importance
           in: query
           name: parameters[importance]
           schema:
             type: integer
-        - description: Is primary
-          in: query
-          name: parameters[is_primary]
-          schema:
-            type: string
+            enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
         - description: Tickers
           in: query
           name: parameters[tickers]
-          schema:
-            type: string
-        - description: IPO type
-          in: query
-          name: parameters[ipo_type]
-          schema:
-            type: string
-        - description: Type
-          in: query
-          name: type
           schema:
             type: string
         - description: Updated time in Unix format
@@ -3212,113 +1323,6 @@ paths:
           schema:
             type: string
             format: int64
-        - description: Updated time in Unix format
-          in: query
-          name: updated
-          schema:
-            type: string
-            format: int64
-        - description: Display
-          in: query
-          name: parameters[display]
-          schema:
-            type: string
-        - description: Securities
-          in: query
-          name: parameters[securities]
-          schema:
-            type: string
-        - description: Date search field
-          in: query
-          name: parameters[date_search_field]
-          schema:
-            type: string
-        - description: Date search strict
-          in: query
-          name: parameters[date_search_strict]
-          schema:
-            type: boolean
-        - description: Fields
-          in: query
-          name: fields
-          schema:
-            type: string
-        - description: Analyst
-          in: query
-          name: analyst
-          schema:
-            type: string
-        - description: Firm
-          in: query
-          name: firm
-          schema:
-            type: string
-        - description: Analyst IDs
-          in: query
-          name: parameters[analyst_id]
-          schema:
-            type: string
-        - description: Firm IDs
-          in: query
-          name: parameters[firm_id]
-          schema:
-            type: string
-        - description: Search keys
-          in: query
-          name: search_keys
-          schema:
-            type: string
-        - description: Search keys type
-          in: query
-          name: search_keys_type
-          schema:
-            type: string
-        - description: Updated since time in Unix format
-          in: query
-          name: updated_since
-          schema:
-            type: string
-            format: int64
-        - description: Active
-          in: query
-          name: active
-          schema:
-            type: boolean
-        - description: Firm name
-          in: query
-          name: firm_name
-          schema:
-            type: string
-        - description: Analyst name
-          in: query
-          name: analyst_name
-          schema:
-            type: string
-        - description: Symbols
-          in: query
-          name: symbols
-          schema:
-            type: string
-        - description: Latest
-          in: query
-          name: latest
-          schema:
-            type: boolean
-        - description: Rating ID
-          in: query
-          name: rating_id
-          schema:
-            type: string
-        - description: Events
-          in: query
-          name: events
-          schema:
-            type: string
-        - description: Event category
-          in: query
-          name: event_category
-          schema:
-            type: string
       responses:
         "200":
           description: Splits
@@ -3352,13 +1356,118 @@ paths:
       summary: Get Splits
       tags:
         - splits
+  /consensus_ratings:
+    get:
+      description: Get Consensus Ratings for a given symbol
+      operationId: get-consensus-ratings-v1
+      parameters:
+        - description: Page number
+          in: query
+          name: page
+          schema:
+            type: integer
+        - description: Page size
+          in: query
+          name: pagesize
+          schema:
+            type: integer
+        - description: Start date in YYYY-MM-DD format
+          in: query
+          name: parameters[date_from]
+          schema:
+            type: string
+            format: date
+        - description: End date in YYYY-MM-DD format
+          in: query
+          name: parameters[date_to]
+          schema:
+            type: string
+            format: date
+        - description: Tickers
+          in: query
+          name: parameters[tickers]
+          schema:
+            type: string
+        - description: Simplify the ratings to Buy, Hold, Sell
+          in: query
+          name: simplify
+          schema:
+            type: string
+        - description: Aggregate type
+          in: query
+          name: aggregate_type
+          schema:
+            type: string
+            enum:
+              - number
+              - percentage
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/api.ConsensusRating"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - ApiKeyAuth: []
+      summary: Get Consensus Ratings
+      tags:
+        - consensus_ratings
 components:
   securitySchemes:
     ApiKeyAuth:
-      in: query
+      in: header
       name: token
       type: apiKey
   schemas:
+    api.AggregateRating:
+      properties:
+        buy:
+          type: integer
+        hold:
+          type: integer
+        sell:
+          type: integer
+        strong_buy:
+          type: integer
+        strong_sell:
+          type: integer
+      type: object
+    api.ConsensusRating:
+      properties:
+        aggregate_ratings:
+          $ref: "#/components/schemas/api.AggregateRating"
+        aggregate_type:
+          type: string
+        consensus_price_target:
+          type: number
+        consensus_rating:
+          type: string
+        consensus_rating_val:
+          type: number
+        high_price_target:
+          type: number
+        low_price_target:
+          type: number
+        total_analyst_count:
+          type: integer
+        unique_analyst_count:
+          type: integer
+        updated_at:
+          type: string
+      type: object
     api.ErrorResponse:
       properties:
         text:
@@ -3460,6 +1569,30 @@ components:
             type: object
           type: array
       type: object
+    models.RatingsFirmJSON:
+      properties:
+        analyst_ratings_firm:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      type: object
+    models.Rmvd:
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        updated:
+          type: integer
+      type: object
+    models.RmvdJSON:
+      properties:
+        removed:
+          items:
+            $ref: "#/components/schemas/models.Rmvd"
+          type: array
+      type: object
     models.SplitJSON:
       properties:
         splits:
@@ -3468,12 +1601,3 @@ components:
             type: object
           type: array
       type: object
-servers:
-  - url: https://api.benzinga.com/api/v1
-    description: V1
-  - url: https://api.benzinga.com/api/v2
-    description: V2
-  - url: https://api.benzinga.com/api/v2.1
-    description: V2.1
-  - url: https://api.benzinga.com/api/v2.2
-    description: V2.2
