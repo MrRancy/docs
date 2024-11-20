@@ -29,7 +29,7 @@ find "$OPENAPI_DIR" -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json"
             *)
                 # Default servers if filename doesn't match
                 servers='[
-                  {"url": "https://api.benzinga.com/api/v1", "description": "V1"}
+                  {"url": "https://api.benzinga.com", "description": "Default"}
                 ]'
                 ;;
         esac
