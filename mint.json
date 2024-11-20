@@ -95,6 +95,7 @@
         {
           "group": "Calendars",
           "pages": [
+            "api-reference/calendar_api/removed/get-removed-v2",
             "api-reference/calendar_api/conference_calls/get-conference-calls",
             "api-reference/calendar_api/dividends/get-dividends",
             "api-reference/calendar_api/earnings/get-earnings",
@@ -108,7 +109,8 @@
             "api-reference/calendar_api/ratings/get-ratings",
             "api-reference/calendar_api/ratings_analysts/get-ratings-analysts",
             "api-reference/calendar_api/ratings_firms/get-ratings-firms",
-            "api-reference/calendar_api/splits/get-splits"
+            "api-reference/calendar_api/splits/get-splits",
+            "api-reference/calendar_api/consensus_ratings/get-consensus-ratings"
           ]
         },
         {

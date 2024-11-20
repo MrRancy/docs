@@ -1,10 +1,7 @@
 openapi: 3.0.0
 info:
   contact: {}
-  description: This REST API returns structured data for conference calls,
-    dividends, earnings (and future earnings dates), economics, pharmaceutical
-    announcements, guidance, IPOs, secondary offerings, ratings, M&A activity,
-    and splits.
+  description: This REST API returns structured data for conference calls, dividends, earnings (and future earnings dates), economics, pharmaceutical announcements, guidance, IPOs, secondary offerings, ratings, M&A activity, and splits.
   termsOfService: http://swagger.io/terms/
   title: Calendar API
   version: 2.1.0
@@ -1601,3 +1598,6 @@ components:
             type: object
           type: array
       type: object
+servers:
+  - url: https://api.benzinga.com
+    description: Default
