@@ -12,7 +12,7 @@ find "$OPENAPI_DIR" -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json"
         # Determine the server URL(s) based on the filename
         filename=$(basename "$file")
         case "$filename" in
-            "calendar_api.spec.yaml")
+            "calendar_api.spec.yml")
                 servers='[
                   {"url": "https://api.benzinga.com/api/v1", "description": "V1"},
                   {"url": "https://api.benzinga.com/api/v2", "description": "V2"},
