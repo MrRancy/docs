@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Benzinga",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -8,20 +8,25 @@
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#8924A6",
-    "light": "#8924A6",
+    "light": "#ac6bd1",
     "dark": "#0D9373",
+    "background": {
+      "light": "#ffffff",
+      "dark": "#0D1117"
+    },
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#f6f1fa",
+      "to": "#ac6bd1"
     }
   },
   "feedback": {
-    "thumbsRating": true,
     "suggestEdit": true,
-    "raiseIssue": true
+    "raiseIssue": true,
+    "thumbsRating": true
   },
   "modeToggle": {
-    "default": "dark"
+    "isHidden": false,
+    "default": "light"
   },
   "analytics": {
     "ga4": {
@@ -35,7 +40,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Console",
+    "name": "Start for Free",
     "url": "https://www.benzinga.com/apis/licensing/register"
   },
   "api": {
@@ -56,12 +61,16 @@
       "url": "api-reference"
     },
     {
-      "name": "WS Reference",
+      "name": "WebSocket Reference",
       "url": "ws-reference"
     },
     {
-      "name": "Open Source",
-      "url": "open-source"
+      "name": "SDKs",
+      "url": "sdks"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
     }
   ],
   "navigation": [
@@ -104,11 +113,98 @@
       ]
     }
   ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/Benzinga",
-    "facebook": "https://www.facebook.com/Benzinga/",
-    "website": "https://www.benzinga.com/apis/",
-    "github": "https://github.com/benzinga",
-    "linkedin": "https://www.linkedin.com/company/benzinga/"
+  "footer": {
+    "socials": {
+      "twitter": "https://twitter.com/Benzinga",
+      "facebook": "https://www.facebook.com/Benzinga/",
+      "website": "https://www.benzinga.com/apis/",
+      "github": "https://github.com/benzinga",
+      "linkedin": "https://www.linkedin.com/company/benzinga/"
+    },
+    "links": [
+      {
+        "title": "POPULAR",
+        "links": [
+          { "label": "Benzinga", "url": "https://benzinga.com/" },
+          { "label": "Benzinga Pro", "url": "https://benzinga.com/pro" },
+          {
+            "label": "Events",
+            "url": "https://app.benzinga.com/share-secret"
+          },
+          { "label": "Pricing", "url": "https://benzinga.com/pricing" },
+          {
+            "label": "Blog",
+            "url": "https://benzinga.com/blog"
+          }
+        ]
+      },
+      {
+        "title": "USE CASES",
+        "links": [
+          {
+            "label": "Calendar",
+            "url": "https://benzinga.com/api-reference/calendar_api"
+          },
+          {
+            "label": "Logos",
+            "url": "https://benzinga.com/docs/integrations/platforms/kubernetes"
+          },
+          {
+            "label": "WIIMS",
+            "url": "https://benzinga.com/docs/documentation/platform/dynamic-secrets/overview"
+          },
+          {
+            "label": "Quotes",
+            "url": "https://benzinga.com/docs/integrations/frameworks/terraform"
+          },
+          {
+            "label": "Fundamentals",
+            "url": "https://benzinga.com/docs/integrations/platforms/ansible"
+          },
+          {
+            "label": "Ticker Trends",
+            "url": "https://benzinga.com/docs/integrations/cicd/jenkins"
+          },
+          {
+            "label": "SDK",
+            "url": "https://benzinga.com/docs/sdks/overview"
+          }
+        ]
+      },
+      {
+        "title": "QUICK LINKS",
+        "links": [
+          {
+            "label": "Changelog",
+            "url": "https://docs.benzinga.com/changelog/overview"
+          },
+          {
+            "label": "Feedback & Requests",
+            "url": "https://github.com/Benzinga/benzinga/issues"
+          },
+          {
+            "label": "FAQs",
+            "url": "https://docs.benzinga.com/introduction/faq"
+          }
+        ]
+      },
+      {
+        "title": "SUPPORT",
+        "links": [
+          {
+            "label": "Support",
+            "url": "https://benzinga.com/slack"
+          },
+          {
+            "label": "Terms of Service",
+            "url": "https://benzinga.com/terms"
+          },
+          {
+            "label": "Privacy Policy",
+            "url": "https://benzinga.com/privacy"
+          }
+        ]
+      }
+    ]
   }
 }

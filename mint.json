@@ -10,8 +10,6 @@
     "primary": "#8924A6",
     "light": "#ac6bd1",
     "dark": "#0D9373",
-    "ultraLight": "#E7F256",
-    "ultraDark": "#8D9F4C",
     "background": {
       "light": "#ffffff",
       "dark": "#0D1117"
@@ -227,30 +225,18 @@
     },
     "links": [
       {
-        "title": "PRODUCT",
+        "title": "POPULAR",
         "links": [
-          { "label": "Secret Management", "url": "https://infisical.com/" },
-          { "label": "Secret Scanning", "url": "https://infisical.com/radar" },
+          { "label": "Benzinga", "url": "https://benzinga.com/" },
+          { "label": "Benzinga Pro", "url": "https://benzinga.com/pro" },
           {
-            "label": "Share Secrets",
-            "url": "https://app.infisical.com/share-secret"
+            "label": "Events",
+            "url": "https://app.benzinga.com/share-secret"
           },
-          { "label": "Pricing", "url": "https://infisical.com/pricing" },
-          {
-            "label": "Security",
-            "url": "https://infisical.com/docs/internals/security"
-          },
+          { "label": "Pricing", "url": "https://benzinga.com/pricing" },
           {
             "label": "Blog",
-            "url": "https://infisical.com/blog"
-          },
-          {
-            "label": "Infisical vs Vault",
-            "url": "https://infisical.com/infisical-vs-hashicorp-vault"
-          },
-          {
-            "label": "Forum",
-            "url": "https://questions.infisical.com/"
+            "url": "https://benzinga.com/blog"
           }
         ]
       },
@@ -258,122 +244,66 @@
         "title": "USE CASES",
         "links": [
           {
-            "label": "Infisical Agent",
-            "url": "https://infisical.com/docs/documentation/getting-started/introduction"
+            "label": "Calendar",
+            "url": "https://benzinga.com/api-reference/calendar_api"
           },
           {
-            "label": "Kubernetes",
-            "url": "https://infisical.com/docs/integrations/platforms/kubernetes"
+            "label": "Logos",
+            "url": "https://benzinga.com/docs/integrations/platforms/kubernetes"
           },
           {
-            "label": "Dynamic Secrets",
-            "url": "https://infisical.com/docs/documentation/platform/dynamic-secrets/overview"
+            "label": "WIIMS",
+            "url": "https://benzinga.com/docs/documentation/platform/dynamic-secrets/overview"
           },
           {
-            "label": "Terraform",
-            "url": "https://infisical.com/docs/integrations/frameworks/terraform"
+            "label": "Quotes",
+            "url": "https://benzinga.com/docs/integrations/frameworks/terraform"
           },
           {
-            "label": "Ansible",
-            "url": "https://infisical.com/docs/integrations/platforms/ansible"
+            "label": "Fundamentals",
+            "url": "https://benzinga.com/docs/integrations/platforms/ansible"
           },
           {
-            "label": "Jenkins",
-            "url": "https://infisical.com/docs/integrations/cicd/jenkins"
-          },
-          {
-            "label": "Docker",
-            "url": "https://infisical.com/docs/integrations/platforms/docker-intro"
-          },
-          {
-            "label": "AWS ECS",
-            "url": "https://infisical.com/docs/integrations/platforms/ecs-with-agent"
-          },
-          {
-            "label": "GitLab",
-            "url": "https://infisical.com/docs/integrations/cicd/gitlab"
-          },
-          {
-            "label": "GitHub",
-            "url": "https://infisical.com/docs/integrations/cicd/githubactions"
+            "label": "Ticker Trends",
+            "url": "https://benzinga.com/docs/integrations/cicd/jenkins"
           },
           {
             "label": "SDK",
-            "url": "https://infisical.com/docs/sdks/overview"
+            "url": "https://benzinga.com/docs/sdks/overview"
           }
         ]
       },
       {
-        "title": "DEVELOPERS",
+        "title": "QUICK LINKS",
         "links": [
           {
             "label": "Changelog",
-            "url": "https://www.infisical.com/docs/changelog"
-          },
-          {
-            "label": "Status",
-            "url": "https://status.infisical.com/"
+            "url": "https://docs.benzinga.com/changelog/overview"
           },
           {
             "label": "Feedback & Requests",
-            "url": "https://github.com/Infisical/infisical/issues"
+            "url": "https://github.com/Benzinga/benzinga/issues"
           },
           {
-            "label": "Trust of Center",
-            "url": "https://app.vanta.com/infisical.com/trust/hoop8cr78cuarxo9sztvs"
-          },
-          {
-            "label": "Open Source Friends",
-            "url": "https://infisical.com/infisical-friends"
-          },
-          {
-            "label": "How to contribute",
-            "url": "https://www.infisical.com/infisical-heroes"
+            "label": "FAQs",
+            "url": "https://docs.benzinga.com/introduction/faq"
           }
         ]
       },
       {
-        "title": "OTHERS",
+        "title": "SUPPORT",
         "links": [
           {
-            "label": "Customers",
-            "url": "https://infisical.com/customers/traba"
-          },
-          {
-            "label": "Company Handbook",
-            "url": "https://infisical.com/wiki/handbook/overview"
-          },
-          {
-            "label": "Careers",
-            "url": "https://infisical.com/careers"
+            "label": "Support",
+            "url": "https://benzinga.com/slack"
           },
           {
             "label": "Terms of Service",
-            "url": "https://infisical.com/terms"
+            "url": "https://benzinga.com/terms"
           },
           {
             "label": "Privacy Policy",
-            "url": "https://infisical.com/privacy"
-          },
-          {
-            "label": "Subprocessors",
-            "url": "https://infisical.com/subprocessors"
-          },
-          {
-            "label": "SLA",
-            "url": "https://infisical.com/sla"
-          },
-          {
-            "label": "Team Email",
-            "url": "mailto:team@infisical.com"
-          },
-          {
-            "label": "Sales",
-            "url": "mailto:sales@infisical.com"
-          },
-          {
-            "label": "Support",
-            "url": "https://infisical.com/slack"
+            "url": "https://benzinga.com/privacy"
           }
         ]
       }
