@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Benzinga",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -8,20 +8,27 @@
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#8924A6",
-    "light": "#8924A6",
+    "light": "#ac6bd1",
     "dark": "#0D9373",
+    "ultraLight": "#E7F256",
+    "ultraDark": "#8D9F4C",
+    "background": {
+      "light": "#ffffff",
+      "dark": "#0D1117"
+    },
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#f6f1fa",
+      "to": "#ac6bd1"
     }
   },
   "feedback": {
-    "thumbsRating": true,
     "suggestEdit": true,
-    "raiseIssue": true
+    "raiseIssue": true,
+    "thumbsRating": true
   },
   "modeToggle": {
-    "default": "dark"
+    "isHidden": false,
+    "default": "light"
   },
   "analytics": {
     "ga4": {
@@ -35,7 +42,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Console",
+    "name": "Start for Free",
     "url": "https://www.benzinga.com/apis/licensing/register"
   },
   "api": {
@@ -56,12 +63,16 @@
       "url": "api-reference"
     },
     {
-      "name": "WS Reference",
+      "name": "WebSocket Reference",
       "url": "ws-reference"
     },
     {
-      "name": "Open Source",
-      "url": "open-source"
+      "name": "SDKs",
+      "url": "sdks"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
     }
   ],
   "navigation": [
@@ -78,6 +89,28 @@
       "group": "Services",
       "pages": [
         "services/overview"
+      ]
+    },
+    {
+      "group": "",
+      "pages": [
+        "changelog/overview",
+        "changelog/upcoming"
+      ]
+    },
+    {
+      "group": "",
+      "pages": ["sdks/overview"]
+    },
+    {
+      "group": "SDK's",
+      "pages": [
+        "sdks/languages/go",
+        "sdks/languages/python",
+        "sdks/languages/node",
+        "sdks/languages/java",
+        "sdks/languages/csharp",
+        "sdks/languages/ruby"
       ]
     },
     {
@@ -184,11 +217,166 @@
       ]
     }
   ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/Benzinga",
-    "facebook": "https://www.facebook.com/Benzinga/",
-    "website": "https://www.benzinga.com/apis/",
-    "github": "https://github.com/benzinga",
-    "linkedin": "https://www.linkedin.com/company/benzinga/"
+  "footer": {
+    "socials": {
+      "twitter": "https://twitter.com/Benzinga",
+      "facebook": "https://www.facebook.com/Benzinga/",
+      "website": "https://www.benzinga.com/apis/",
+      "github": "https://github.com/benzinga",
+      "linkedin": "https://www.linkedin.com/company/benzinga/"
+    },
+    "links": [
+      {
+        "title": "PRODUCT",
+        "links": [
+          { "label": "Secret Management", "url": "https://infisical.com/" },
+          { "label": "Secret Scanning", "url": "https://infisical.com/radar" },
+          {
+            "label": "Share Secrets",
+            "url": "https://app.infisical.com/share-secret"
+          },
+          { "label": "Pricing", "url": "https://infisical.com/pricing" },
+          {
+            "label": "Security",
+            "url": "https://infisical.com/docs/internals/security"
+          },
+          {
+            "label": "Blog",
+            "url": "https://infisical.com/blog"
+          },
+          {
+            "label": "Infisical vs Vault",
+            "url": "https://infisical.com/infisical-vs-hashicorp-vault"
+          },
+          {
+            "label": "Forum",
+            "url": "https://questions.infisical.com/"
+          }
+        ]
+      },
+      {
+        "title": "USE CASES",
+        "links": [
+          {
+            "label": "Infisical Agent",
+            "url": "https://infisical.com/docs/documentation/getting-started/introduction"
+          },
+          {
+            "label": "Kubernetes",
+            "url": "https://infisical.com/docs/integrations/platforms/kubernetes"
+          },
+          {
+            "label": "Dynamic Secrets",
+            "url": "https://infisical.com/docs/documentation/platform/dynamic-secrets/overview"
+          },
+          {
+            "label": "Terraform",
+            "url": "https://infisical.com/docs/integrations/frameworks/terraform"
+          },
+          {
+            "label": "Ansible",
+            "url": "https://infisical.com/docs/integrations/platforms/ansible"
+          },
+          {
+            "label": "Jenkins",
+            "url": "https://infisical.com/docs/integrations/cicd/jenkins"
+          },
+          {
+            "label": "Docker",
+            "url": "https://infisical.com/docs/integrations/platforms/docker-intro"
+          },
+          {
+            "label": "AWS ECS",
+            "url": "https://infisical.com/docs/integrations/platforms/ecs-with-agent"
+          },
+          {
+            "label": "GitLab",
+            "url": "https://infisical.com/docs/integrations/cicd/gitlab"
+          },
+          {
+            "label": "GitHub",
+            "url": "https://infisical.com/docs/integrations/cicd/githubactions"
+          },
+          {
+            "label": "SDK",
+            "url": "https://infisical.com/docs/sdks/overview"
+          }
+        ]
+      },
+      {
+        "title": "DEVELOPERS",
+        "links": [
+          {
+            "label": "Changelog",
+            "url": "https://www.infisical.com/docs/changelog"
+          },
+          {
+            "label": "Status",
+            "url": "https://status.infisical.com/"
+          },
+          {
+            "label": "Feedback & Requests",
+            "url": "https://github.com/Infisical/infisical/issues"
+          },
+          {
+            "label": "Trust of Center",
+            "url": "https://app.vanta.com/infisical.com/trust/hoop8cr78cuarxo9sztvs"
+          },
+          {
+            "label": "Open Source Friends",
+            "url": "https://infisical.com/infisical-friends"
+          },
+          {
+            "label": "How to contribute",
+            "url": "https://www.infisical.com/infisical-heroes"
+          }
+        ]
+      },
+      {
+        "title": "OTHERS",
+        "links": [
+          {
+            "label": "Customers",
+            "url": "https://infisical.com/customers/traba"
+          },
+          {
+            "label": "Company Handbook",
+            "url": "https://infisical.com/wiki/handbook/overview"
+          },
+          {
+            "label": "Careers",
+            "url": "https://infisical.com/careers"
+          },
+          {
+            "label": "Terms of Service",
+            "url": "https://infisical.com/terms"
+          },
+          {
+            "label": "Privacy Policy",
+            "url": "https://infisical.com/privacy"
+          },
+          {
+            "label": "Subprocessors",
+            "url": "https://infisical.com/subprocessors"
+          },
+          {
+            "label": "SLA",
+            "url": "https://infisical.com/sla"
+          },
+          {
+            "label": "Team Email",
+            "url": "mailto:team@infisical.com"
+          },
+          {
+            "label": "Sales",
+            "url": "mailto:sales@infisical.com"
+          },
+          {
+            "label": "Support",
+            "url": "https://infisical.com/slack"
+          }
+        ]
+      }
+    ]
   }
 }
