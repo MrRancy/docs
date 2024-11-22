@@ -209,7 +209,11 @@
         {
           "group": "Data Websocket",
           "pages": [
-            "ws-reference/data-websocket/get-analyst-insights-stream"
+            "ws-reference/data-websocket/get-analyst-insights-stream",
+            "ws-reference/data-websocket/get-bulls-bears-say-stream",
+            "ws-reference/data-websocket/get-calendar-earnings-stream",
+            "ws-reference/data-websocket/get-calendar-ratings-stream",
+            "ws-reference/data-websocket/get-consensus-ratings-stream"
           ]
         }
       ]
