@@ -90,28 +90,6 @@
       ]
     },
     {
-      "group": "",
-      "pages": [
-        "changelog/overview",
-        "changelog/upcoming"
-      ]
-    },
-    {
-      "group": "",
-      "pages": ["sdks/overview"]
-    },
-    {
-      "group": "SDK's",
-      "pages": [
-        "sdks/languages/go",
-        "sdks/languages/python",
-        "sdks/languages/node",
-        "sdks/languages/java",
-        "sdks/languages/csharp",
-        "sdks/languages/ruby"
-      ]
-    },
-    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction",
@@ -231,13 +209,22 @@
       {
         "title": "POPULAR",
         "links": [
-          { "label": "Benzinga", "url": "https://benzinga.com/" },
-          { "label": "Benzinga Pro", "url": "https://benzinga.com/pro" },
+          {
+            "label": "Benzinga",
+            "url": "https://benzinga.com/"
+          },
+          {
+            "label": "Benzinga Pro",
+            "url": "https://benzinga.com/pro"
+          },
           {
             "label": "Events",
             "url": "https://app.benzinga.com/share-secret"
           },
-          { "label": "Pricing", "url": "https://benzinga.com/pricing" },
+          {
+            "label": "Pricing",
+            "url": "https://benzinga.com/pricing"
+          },
           {
             "label": "Blog",
             "url": "https://benzinga.com/blog"
